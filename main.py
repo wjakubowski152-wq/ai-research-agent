@@ -1,7 +1,4 @@
 from ai_research import research_topic
-import json
-from datetime import datetime
-from pathlib import Path
 from openai import (
     AuthenticationError,
     RateLimitError,
@@ -12,13 +9,34 @@ from conversation import trim_history
 from report import save_report
 
 
+def display_report(result):
+    print("\n=== RESEARCH REPORT ===")
+    print("Topic:", result.topic)
+
+    print("\n=== SUMMARY ===")
+    print(result.summary)
+
+    print("\n=== KEY FINDINGS ===")
+    for finding in result.key_findings:
+        print(f"- {finding}")
+
+    print("\n=== KEYWORDS ===")
+    for keyword in result.keywords:
+        print(f"- {keyword}")
+
+    print("\n=== SOURCES ===")
+    for source in result.sources:
+        print(f"- {source}")
+
+    print("\n=== CONFIDENCE ===")
+    print(result.confidence)
+
+
 def main():
     conversation_history = []
 
     print("AI RESEARCH AGENT")
     print("Type 'exit' to quit.")
-
-
 
     while True:
         topic = input("\nEnter research topic: ").strip()
@@ -33,26 +51,7 @@ def main():
 
         try:
             result = research_topic(topic, conversation_history)
-            print("\n=== RESEARCH REPORT ===")
-            print("Topic:", result.topic)
-
-            print("\n=== SUMMARY ===")
-            print(result.summary)
-
-            print("\n=== KEY FINDINGS ===")
-            for finding in result.key_findings:
-                print(f"- {finding}")
-
-            print("\n=== KEYWORDS ===")
-            for keyword in result.keywords:
-                print(f"- {keyword}")
-
-            print("\n=== SOURCES ===")
-            for source in result.sources:
-                print(f"- {source}")
-
-            print("\n=== CONFIDENCE ===")
-            print(result.confidence)
+            display_report(result)
 
             save_report(result)
 

@@ -57,7 +57,7 @@ def main():
 
     topic = input("Enter research topic: ")
 
-    result = research_topic(topic)
+    result = research_topic(topic, [])
 
     print("\n=== RESEARCH RESULT ===")
     print("Topic:", result.topic)

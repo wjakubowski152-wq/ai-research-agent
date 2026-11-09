@@ -10,6 +10,10 @@ An AI-powered research assistant built with Python and the OpenAI API.
 - JSON report export
 - API error handling
 - Unit tests with pytest
+- Unit tests for conversation history management
+- Report generation and error handling tests
+- Mocked API response tests
+- Structured output validation tests
 
 
 
@@ -22,6 +26,27 @@ An AI-powered research assistant built with Python and the OpenAI API.
 - pytest
 - Git
 
+## Project Structure
+
+```text
+ai-research-agent/
+├── tests/
+│   ├── test_conversations.py
+│   ├── test_display.py
+│   ├── test_mocking.py
+│   ├── test_report.py
+│   ├── test_schema.py
+│   └── test_web_search.py
+├── main.py
+├── ai_research.py
+├── schemas.py
+├── conversation.py
+├── report.py
+├── requirements.txt
+├── .env
+├── .gitignore
+└── README.md
+```
 ## Setup
 
 1. Clone the repository
@@ -39,7 +64,7 @@ python -m venv .venv
 
 3. Install dependencies
 ```bash
-pip install openai python-dotenv pydantic pytest
+pip install -r requirements.txt
 ```
 4. Configure environment
 

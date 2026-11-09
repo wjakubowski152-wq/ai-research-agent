@@ -50,3 +50,28 @@ def test_save_report_creates_multiple_files(tmp_path, monkeypatch):
     files = list(reports_dir.glob("*.json"))
 
     assert len(files) == 2
+
+def test_save_report_handles_os_error(tmp_path, capsys, monkeypatch):
+    result = ResearchResult(
+        topic="Cybersecurity",
+        summary="Security research.",
+        difficulty="beginner",
+        keywords=["security"],
+        key_findings=["MFA improves security."],
+        confidence=0.95,
+        sources=["https://example.com"]
+    )
+
+    monkeypatch.chdir(tmp_path)
+
+    def mock_open(*args, **kwargs):
+        raise OSError("Disk is unavailable")
+
+    monkeypatch.setattr("builtins.open", mock_open)
+
+    save_report(result)
+
+    captured = capsys.readouterr()
+
+    assert "Error saving report" in captured.out
+    assert "Disk is unavailable" in captured.out
