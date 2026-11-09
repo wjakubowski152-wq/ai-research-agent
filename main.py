@@ -9,26 +9,7 @@ from openai import (
     APIError
 )
 from conversation import trim_history
-
-
-def save_report(result):
-    reports_dir = Path("reports")
-    reports_dir.mkdir(exist_ok=True)
-
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"research_{timestamp}.json"
-
-    file_path = reports_dir / filename
-
-    with open(file_path, "w", encoding="utf-8") as file:
-        json.dump(
-            result.model_dump(),
-            file,
-            ensure_ascii=False,
-            indent=4
-        )
-
-    print(f"\nReport saved to: {file_path}")
+from report import save_report
 
 
 def main():
