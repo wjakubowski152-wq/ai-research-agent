@@ -1,19 +1,11 @@
 
-import os
-from dotenv import load_dotenv
+from config import OPENAI_API_KEY, OPENAI_MODEL
 from openai import OpenAI
 from schemas import ResearchResult
 from logger_config import logger
 
-
-load_dotenv()
-
-client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY")
-)
-
-model = os.getenv("OPENAI_MODEL")
-
+client = OpenAI(api_key=OPENAI_API_KEY)
+model = OPENAI_MODEL
 
 def research_topic(
     topic: str,
