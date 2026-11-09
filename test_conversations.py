@@ -31,3 +31,23 @@ def test_trim_history_with_custom_limit():
     result = trim_history(history, max_messages=4)
 
     assert result == [6, 7, 8, 9]
+
+def test_trim_history_with_zero_limit():
+    history = [
+        {"role": "user", "content": "Hello"},
+        {"role": "assistant", "content": "Hi"}
+    ]
+
+    result = trim_history(history, max_messages=0)
+
+    assert result == []
+
+import pytest
+def test_trim_history_with_negative_limit():
+    history = [
+        {"role": "user", "content": "Hello"},
+        {"role": "assistant", "content": "Hi"}
+    ]
+
+    with pytest.raises(ValueError):
+        trim_history(history, max_messages=-2)

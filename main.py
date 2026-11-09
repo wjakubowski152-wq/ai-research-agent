@@ -30,14 +30,11 @@ def save_report(result):
 
     print(f"\nReport saved to: {file_path}")
 
-def trim_history(history, max_messages=10):
-    max_messages = max_messages - (max_messages % 2)
-    return history[-max_messages:]
 
 def main():
     conversation_history = []
 
-    print("=== AI RESEARCH AGENT ===")
+    print("AI RESEARCH AGENT")
     print("Type 'exit' to quit.")
 
 
