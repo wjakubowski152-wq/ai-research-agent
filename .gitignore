@@ -17,3 +17,7 @@ venv/
 
 # Generated reports
 reports/
+
+# Application logs
+*.log
+logs/

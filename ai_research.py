@@ -1,10 +1,9 @@
 
 import os
-
 from dotenv import load_dotenv
 from openai import OpenAI
-
 from schemas import ResearchResult
+from logger_config import logger
 
 
 load_dotenv()
@@ -20,6 +19,7 @@ def research_topic(
     topic: str,
     conversation_history: list
 ) -> ResearchResult:
+    logger.info(f"Starting research for topic: {topic}")
 
     input_messages = conversation_history[-10:] + [
         {

@@ -7,7 +7,7 @@ from openai import (
 )
 from conversation import trim_history
 from report import save_report
-
+from logger_config import logger
 
 def display_report(result):
     print("\n=== RESEARCH REPORT ===")
@@ -34,6 +34,7 @@ def display_report(result):
 
 def main():
     conversation_history = []
+    logger.info("AI Research Agent started")
 
     print("AI RESEARCH AGENT")
     print("Type 'exit' to quit.")
@@ -68,16 +69,18 @@ def main():
             conversation_history = trim_history(conversation_history)
 
         except AuthenticationError:
-            print("Error: Invalid API key.")
+            logger.error("Invalid API key.")
 
         except RateLimitError:
-            print("Error: API rate limit exceeded.")
+            logger.warning("API rate limit exceeded.")
 
         except APIConnectionError:
-            print("Error: Could not connect to OpenAI API.")
+            logger.error("Could not connect to OpenAI API.")
 
         except APIError as error:
-            print(f"OpenAI API error: {error}")
+            logger.error(f"OpenAI API error: {error}")
+        except Exception:
+            logger.exception("Unexpected error during research")
 
 
 if __name__ == "__main__":
